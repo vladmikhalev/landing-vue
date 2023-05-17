@@ -2,7 +2,6 @@
   <div>
     <div class="container">
       <header id="masthead" class="site-header">
-        <!-- <button @click="fetchPosts">get posts</button> -->
         <div class="site-branding">
           <h1 class="site-title"><a href="index.html" rel="home">Moschino</a></h1>
           <h2 class="site-description">Minimalist Portfolio HTML Template</h2>
@@ -36,20 +35,18 @@
           <main v-if="posts.length > 0" id="main" class="site-main">
             <div class="grid portfoliogrid articleList">
 
-              <!-- :src="post.image"  -->
 
-              <article v-for="post in posts" :key="post.id" class="hentry">
+              <article v-for="post in posts" :key="post.id" class="hentry" @click="$router.push(`/DetailArticle/${post.id}`)">
                 <header class="entry-header">
                   <div class="entry-thumbnail">
-                    <a href="portfolio-item.html">
                       <img src="https://cdn.dribbble.com/userupload/7067483/file/original-951562a758c87c94e5e8e9df607ca127.jpg?compress=1&resize=752x"
                         class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="p1" />
-                    </a>
-                  </div>
-                  <h2 class="entry-title"><a href="portfolio-item.html" rel="bookmark">{{ post.title }}</a></h2>
-                  <a class='portfoliotype' href='portfolio-category.html'>summer</a>
-                  <a class='portfoliotype' href='portfolio-category.html'>woman</a>
-                  <a class='portfoliotype' href='portfolio-category.html'>yellow</a>
+                      </div>
+                      <h2 class="entry-title">
+                        <a href="portfolio-item.html" rel="bookmark">{{ post.title }}</a></h2>
+                  <a class='portfoliotype' href='#'>summer</a>
+                  <a class='portfoliotype' href='#'>woman</a>
+                  <a class='portfoliotype' href='#'>yellow</a>
                 </header>
               </article>
 
@@ -62,11 +59,11 @@
             <br />
 
           </main>
-          <h2 style="text-align: center;" v-else>Нет статей</h2>
+          <h2 style="text-align: center;" v-else>....Загрузка</h2>
           <!-- #main -->
         </div>
         <!-- #primary -->
-      </div>
+      </div> 
       <!-- #content -->
     </div>
   </div>
@@ -101,7 +98,6 @@ export default defineComponent({
           },
         });
         const data = response.data;
-        console.log(data);
         this.totalPages = Math.ceil(data.length / this.limit);
         this.posts = data;
       } catch (error) {
@@ -130,7 +126,6 @@ export default defineComponent({
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .pagination-container {
   display: flex;
@@ -161,9 +156,5 @@ export default defineComponent({
   background-color: #2988c8;
 }
 
-.articleList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+
 </style>

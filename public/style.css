@@ -192,7 +192,6 @@ dfn,cite,em,i {
 	font-style:italic;
 }
 blockquote {
-	border-left:5px solid #ffd700;
 	margin-bottom:20px;
 	padding:10px 20px;
 }
@@ -694,6 +693,7 @@ a:active,a:focus {
 .bypostauthor {
 }
 .hentry {
+	cursor: pointer;
 	margin: 0 0 3.5em;
 }
 .single-post .hentry {
@@ -2009,6 +2009,11 @@ ul.shortcode-archive li {
 }
 .portfoliogrid article.hentry {
 	margin-bottom:30px;
+}
+.articleList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 a.portfoliotype {
 	text-decoration:none;

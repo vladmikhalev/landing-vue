@@ -534,19 +534,31 @@ a:active,a:focus {
 }
 /* Paging Navigation */
 .pagination {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	clear:both;
 	padding:15px 15px 30px 15px;
 	overflow:hidden;
 	text-align:center;
 }
-.pagination a {
+.pagination div {
+	cursor: pointer;
 	padding:5px 10px;
 	margin-right:2px;
 	background:#ccc;
 	color:#fff;
 	text-decoration:blink;
 }
-.pagination a:hover,.pagination .current {
+
+.page-numbers:hover {
+	padding:5px 10px;
+	margin-right:2px;
+	background:#ffd700;
+	color:#fff;
+}
+
+.pagination .current {
 	padding:5px 10px;
 	margin-right:2px;
 	background:#ffd700;
@@ -1974,7 +1986,6 @@ ul.shortcode-archive li {
 		margin-right:-1.2%;
 	}
 	.portfoliogrid article {
-		background-color: red;
 		width:30.93%;
 		margin-left:1.2%;
 		margin-right:1.2%;

@@ -38,23 +38,23 @@
 
               <!-- :src="post.image"  -->
 
-                <article v-for="post in posts" :key="post.id" class="hentry">
-                  <header class="entry-header">
-                    <div class="entry-thumbnail">
-                      <a href="portfolio-item.html">
-                        <img src="http://s3.amazonaws.com/caymandemo/wp-content/uploads/sites/15/2015/09/30162427/p1.jpg"
-                          class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="p1" />
-                      </a>
-                    </div>
-                    <h2 class="entry-title"><a href="portfolio-item.html" rel="bookmark">Sunset Beach</a></h2>
-                    <a class='portfoliotype' href='portfolio-category.html'>summer</a>
-                    <a class='portfoliotype' href='portfolio-category.html'>woman</a>
-                    <a class='portfoliotype' href='portfolio-category.html'>yellow</a>
-                  </header>
-                </article>
+              <article v-for="post in posts" :key="post.id" class="hentry">
+                <header class="entry-header">
+                  <div class="entry-thumbnail">
+                    <a href="portfolio-item.html">
+                      <img src="http://s3.amazonaws.com/caymandemo/wp-content/uploads/sites/15/2015/09/30162427/p1.jpg"
+                        class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="p1" />
+                    </a>
+                  </div>
+                  <h2 class="entry-title"><a href="portfolio-item.html" rel="bookmark">{{ post.title }}</a></h2>
+                  <a class='portfoliotype' href='portfolio-category.html'>summer</a>
+                  <a class='portfoliotype' href='portfolio-category.html'>woman</a>
+                  <a class='portfoliotype' href='portfolio-category.html'>yellow</a>
+                </header>
+              </article>
 
-<!-- 
-              <article class="hentry">
+              <!-- 
+                <article class="hentry">
                 <header class="entry-header">
                   <div class="entry-thumbnail">
                     <a href="portfolio-item.html">
@@ -142,10 +142,23 @@
             </div>
             <!-- .grid -->
 
-            <nav class="pagination">
+
+
+
+
+            <vue-awesome-paginate :total-items="totalPages" :items-per-page="2" :max-pages-shown="limit" v-model="page"
+              :on-click="changePage" />
+            <!-- <nav class="pagination">
               <span class="page-numbers current">1</span>
               <a class="page-numbers" href="#">2</a>
               <a class="next page-numbers" href="#">Next »</a>
+            </nav> -->
+            <nav class="pagination">
+              <div class="page-numbers" v-for="pageNumber in totalPages" :key="pageNumber"
+                :class="{ 'current': page === pageNumber }" @click="changePage(pageNumber)">
+                {{ pageNumber }}
+              </div>
+
             </nav>
 
             <br />
@@ -164,6 +177,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import axios from 'axios';
+import { LOGICAL_OPERATORS } from '@babel/types';
 
 interface IPost {
   id: string;
@@ -177,23 +191,64 @@ interface IPost {
 export default defineComponent({
   name: 'HelloWorld',
   methods: {
+    changePage(pageNumber: number) {
+      this.page = pageNumber;
+      this.fetchPosts();
+    },
     async fetchPosts() {
       try {
         const response = await axios.get('https://6082e3545dbd2c001757abf5.mockapi.io/qtim-test-work/posts/');
-        const tenPosts = response.data.slice(0, 9);
-        console.log(tenPosts);
-        this.posts = tenPosts;
+        const data = response.data;
+        console.log(data);
+        const currentPosts = response.data.slice(this.indexPages, this.indexPages + 9);
+        this.indexPages = this.indexPages + this.limit;
+        console.log(currentPosts);
+        this.totalPages = Math.ceil(data.length / this.limit);
+        this.posts = currentPosts;
+        console.log(this.posts);
       } catch (error) {
         alert(error);
       }
-    }
+    },
   },
   data() {
     return {
+      page: 1,
+      limit: 9,
+      indexPages: 0,
+      totalPages: 0,
+      isPostsLoading: false,
       posts: [] as IPost[],
+      // posts: [
+        // {
+        //   id: "1",
+        //   createdAt: "2021-04-23T05:11:54.250Z",
+        //   title: "rrrrrrrrrrrrrrr",
+        //   preview: "programming the port won't do anything, we need to copy the auxiliary USB system!",
+        //   image: "http://lorempixel.com/640/480/technics",
+        //   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        // },
+        // {
+        //   id: "2",
+        //   createdAt: "2021-04-23T05:11:54.250Z",
+        //   title: "qqqqqqqqqqq",
+        //   preview: "programming the port won't do anything, we need to copy the auxiliary USB system!",
+        //   image: "http://lorempixel.com/640/480/technics",
+        //   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        // },
+        // {
+        //   id: "3",
+        //   createdAt: "2021-04-23T05:11:54.250Z",
+        //   title: "wwwwwwwwwwww",
+        //   preview: "programming the port won't do anything, we need to copy the auxiliary USB system!",
+        //   image: "http://lorempixel.com/640/480/technics",
+        //   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        // },
+      // ],
+
     }
   },
-  mounted() {
+  created() {
     this.fetchPosts();
   },
 });

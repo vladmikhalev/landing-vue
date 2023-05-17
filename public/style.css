@@ -320,7 +320,7 @@ button,input[type="button"],input[type="reset"],input[type="submit"] {
 	/* Improves usability and consistency of cursor style between image-type 'input' and others */
 	-webkit-appearance:button;
 	/* Corrects inability to style clickable 'input' types in iOS */
-	padding:3px 15px;
+	padding:3px 10px;
 }
 button:hover,input[type="button"]:hover,input[type="reset"]:hover,input[type="submit"]:hover {
 	opacity:0.6;
@@ -2297,4 +2297,29 @@ h1, h2, h3, h4, h5, h6 {
     -moz-transition: border linear 0.2s,box-shadow linear 0.2s;
     -o-transition: border linear 0.2s,box-shadow linear 0.2s;
     transition: border linear 0.2s,box-shadow linear 0.2s;
+}
+
+.pagination-container {
+	display: flex;
+	column-gap: 10px;
+}
+.paginate-buttons {
+	height: 40px;
+	width: 40px;
+	border-radius: 20px;
+	cursor: pointer;
+	background-color: rgb(242, 242, 242);
+	border: 1px solid rgb(217, 217, 217);
+	color: black;
+}
+.paginate-buttons:hover {
+	background-color: #d8d8d8;
+}
+.active-page {
+	background-color: #3498db;
+	border: 1px solid #3498db;
+	color: white;
+}
+.active-page:hover {
+	background-color: #2988c8;
 }

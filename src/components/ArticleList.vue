@@ -10,49 +10,18 @@
           <button class="menu-toggle">Menu</button>
           <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
           <div class="menu-menu-1-container">
-            <ul id="menu-menu-1" class="menu">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="shop.html">Shop</a></li>
-              <li><a href="blog.html">Blog</a></li>
-              <li><a href="elements.html">Elements</a></li>
-              <li><a href="#">Pages</a>
-                <ul class="sub-menu">
-                  <li><a href="portfolio-item.html">Portfolio Item</a></li>
-                  <li><a href="blog-single.html">Blog Article</a></li>
-                  <li><a href="shop-single.html">Shop Item</a></li>
-                  <li><a href="portfolio-category.html">Portfolio Category</a></li>
-                </ul>
-              </li>
-              <li><a href="contact.html">Contact</a></li>
-            </ul>
+            Тестовое задание QTIM
           </div>
         </nav>
       </header>
-      <!-- #masthead -->
       <div id="content" class="site-content">
         <div id="primary" class="content-area column full">
           <main v-if="posts.length > 0" id="main" class="site-main">
             <div class="grid portfoliogrid articleList">
 
-
-              <article v-for="post in posts" :key="post.id" class="hentry" @click="$router.push(`/DetailArticle/${post.id}`)">
-                <header class="entry-header">
-                  <div class="entry-thumbnail">
-                      <img src="https://cdn.dribbble.com/userupload/7067483/file/original-951562a758c87c94e5e8e9df607ca127.jpg?compress=1&resize=752x"
-                        class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="p1" />
-                      </div>
-                      <h2 class="entry-title">
-                        <a href="portfolio-item.html" rel="bookmark">{{ post.title }}</a></h2>
-                  <a class='portfoliotype' href='#'>summer</a>
-                  <a class='portfoliotype' href='#'>woman</a>
-                  <a class='portfoliotype' href='#'>yellow</a>
-                </header>
-              </article>
+              <Article v-for="post in posts" :key="post.id" :post="post" />
 
             </div>
-            <!-- .grid -->
-
             <vue-awesome-paginate :total-items="50" v-model="page" :items-per-page="5" :max-pages-shown="5"
               :on-click="changePage" :hide-prev-next-when-ends="true" />
 
@@ -60,11 +29,8 @@
 
           </main>
           <h2 style="text-align: center;" v-else>....Загрузка</h2>
-          <!-- #main -->
         </div>
-        <!-- #primary -->
       </div> 
-      <!-- #content -->
     </div>
   </div>
 </template>
@@ -72,6 +38,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import axios from 'axios';
+import Article from '@/components/Article.vue';
 
 interface IPost {
   id: string;
@@ -84,6 +51,7 @@ interface IPost {
 
 export default defineComponent({
   name: 'HelloWorld',
+  components: {Article},
   methods: {
     changePage(pageNumber: number) {
       this.page = pageNumber;

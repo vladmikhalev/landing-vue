@@ -1,28 +1,33 @@
 <template>
-  <article class="hentry">
+  <article class="hentry" @click="$router.push(`/DetailArticle/${post.id}`)">
     <header class="entry-header">
       <div class="entry-thumbnail">
-        <a href="portfolio-item.html">
-          <img src="http://s3.amazonaws.com/caymandemo/wp-content/uploads/sites/15/2015/09/30162427/p1.jpg"
-            class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="p1" />
-        </a>
+        <img
+          src="https://cdn.dribbble.com/userupload/7067483/file/original-951562a758c87c94e5e8e9df607ca127.jpg?compress=1&resize=752x"
+          class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="p1" />
       </div>
-      <h2 class="entry-title"><a href="portfolio-item.html" rel="bookmark">Sunset Beach</a></h2>
-      <a class='portfoliotype' href='portfolio-category.html'>summer</a>
-      <a class='portfoliotype' href='portfolio-category.html'>woman</a>
-      <a class='portfoliotype' href='portfolio-category.html'>yellow</a>
+      <h2 class="entry-title">
+        <a href="portfolio-item.html" rel="bookmark">{{ post.title }}</a>
+      </h2>
+      <a class='portfoliotype' href='#'>summer</a>
+      <a class='portfoliotype' href='#'>woman</a>
+      <a class='portfoliotype' href='#'>yellow</a>
     </header>
   </article>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HelloWorld from '@/components/ArticleList.vue'; // @ is an alias to /src
+
+
 
 export default defineComponent({
-  name: 'HomeView',
-  components: {
-    HelloWorld,
-  },
+    name: 'Article',
+  props: {
+    post: {
+      type: Object,
+      required: true,
+    }
+  }
 });
 </script>

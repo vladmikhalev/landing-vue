@@ -8,6 +8,9 @@
 - Переход на детальную информацию статьи
 - Роутинг vue-router
 
+github pages 
+https://vladmikhalev.github.io/landing-vue/
+
 ## Project setup
 ```
 npm install

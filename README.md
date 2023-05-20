@@ -4,7 +4,6 @@
 
 <img width="548" alt="Screenshot 2023-05-19 at 18 41 29" src="https://github.com/vladmikhalev/landing-vue/assets/107835280/89195ec2-fd55-460c-8224-f1e4c3b5f08e">
 
-
 В этом проекте реализовано:
 - Вывод статей блога. Данные беруться с mockapi.
 - Пагинация для постраничного перехода
